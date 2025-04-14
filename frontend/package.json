@@ -1,0 +1,29 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "description": "frontend.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "yaroslav",
+  "dependencies": {
+    "@metamask/eth-sig-util": "^4.0.1",
+    "aes256": "^1.1.0",
+    "ascii85": "^1.0.2",
+    "eciesjs": "^0.3.15",
+    "ethers": "^5.6.4",
+    "next": "12.1.5",
+    "react": "18.3.0",
+    "react-bootstrap": "^2.10.9",
+    "react-dom": "18.3.0",
+    "wagmi": "^0.8.6"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "@types/react": "18.3.0",
+    "@types/react-dom": "18.3.0",
+    "typescript": "~4.7.0"
+  }
+}
