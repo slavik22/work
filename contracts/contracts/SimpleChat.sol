@@ -1,10 +1,8 @@
 pragma solidity ^0.8.8;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-
 error SimpleChatError(string message);
 
-contract SimpleChat is Ownable {
+contract SimpleChat {
     struct UserAccount {
         bytes encryptedPrivateKey;
         bool pubKeyY;
@@ -30,7 +28,6 @@ contract SimpleChat is Ownable {
     function isUserExist(address u) public view returns (bool) {
         return !(userAccounts[u].encryptedPrivateKey.length == 0);
     }
-
 
     function joinChat(
         bytes calldata encryptedKey,
