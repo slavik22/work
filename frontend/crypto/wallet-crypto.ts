@@ -1,12 +1,13 @@
 import { Buffer } from 'buffer';
 const ascii85 = require('ascii85');
+const { encrypt } = require('@metamask/eth-sig-util');
 
 interface WalletCryptoProvider {
   request(args: { method: string; params?: any[] }): Promise<any>;
 }
 
 export class WalletCrypto {
-  private readonly encryptionScheme = 'x25519-xsalsa20-poly1305';
+  private readonly encryptionScheme = 'ecies';
   private readonly walletAddress: string;
   private readonly provider: WalletCryptoProvider;
 
@@ -35,10 +36,9 @@ export class WalletCrypto {
   }
 
   private async encryptWithMetaMask(publicKey: Buffer, data: Buffer): Promise<any> {
-    const { encrypt } = await import('@metamask/eth-sig-util');
     return encrypt({
       publicKey: publicKey.toString('base64'),
-      data: ascii85.encode(data).toString(), // Replaced ascii85 with base64
+      data: ascii85.encode(data).toString(),
       version: this.encryptionScheme,
     });
   }
@@ -57,7 +57,7 @@ export class WalletCrypto {
         method: 'eth_decrypt',
         params: [payload, this.walletAddress],
       });
-      return ascii85.decode(decrypted); // Replaced ascii85.decode with base64
+      return ascii85.decode(decrypted);
     } catch (error) {
       throw new Error(`Decryption failed: ${error}`);
     }
